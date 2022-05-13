@@ -2,11 +2,16 @@
 
 import Header from './components/Header'
 import Tasks from './components/Tasks'
+import AddTask from './components/AddTask'
 import { useState } from "react"
+// Below Is state
+
 
 const App = () => {
 // always put your state globally 
 //useState takes in tasks and function to update seTask
+const [showAddtask , setShowAddTask] = useState(false)
+
 const [tasks, setTasks] = useState([
   {
       id: 1,
@@ -28,6 +33,15 @@ const [tasks, setTasks] = useState([
   },
 ])
 
+// Adding ask
+const addTask = (task) => {
+  // Create ID
+  const id = Math.floor(Math.random() * 10000) + 1
+
+  const newTask = { id , ...task } 
+  setTasks([...tasks , newTask]) // set tast and add newTask
+}
+
 // Delete Component functionality
 // Delete the task in the UI
 const deleteTask = (id) => {
@@ -47,7 +61,8 @@ const toggleRemainder = (id) => {
   // if task.length > 0 ? :(Then) ("No task to Show")
   return (
     <div className='container'>
-      <Header />
+      <Header onAdd={() => setShowAddTask(!showAddtask)} />
+      {showAddtask && <AddTask onAdd={addTask} />}
       {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleRemainder} /> : ('No Task To Show')}
 
     </div>
