@@ -61,7 +61,7 @@ const toggleRemainder = (id) => {
   // if task.length > 0 ? :(Then) ("No task to Show")
   return (
     <div className='container'>
-      <Header onAdd={() => setShowAddTask(!showAddtask)} />
+      <Header onAdd={() => setShowAddTask(!showAddtask)} showAdd={showAddtask}/>
       {showAddtask && <AddTask onAdd={addTask} />}
       {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleRemainder} /> : ('No Task To Show')}
 
